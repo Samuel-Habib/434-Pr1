@@ -24,7 +24,7 @@ int main(int argc, char* argv[]){
 	srand(time(NULL));   
 
 	if(L < 20000){
-		L = 20000
+		L = 20000;
 	}
 
 	for(int i = 0; i< L; i++){
@@ -34,6 +34,7 @@ int main(int argc, char* argv[]){
 
 		sprintf(buffer, "%d", r);
 		fputs(buffer, fd);
+		fputs(" ", fd);
 	}
 
 

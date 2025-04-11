@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <time.h> 
 #include <stdint.h>
-
+#include <unistd.h>
 
 
 int main(int argc, char* argv[]){
@@ -14,13 +14,8 @@ int main(int argc, char* argv[]){
 	int pn = atoi(argv[3]);
 	int r; // random variable
 
-	// generate the text file with L >= 20,000 integers and 80 negative integers ranging  
-	FILE *fd;
-	char buffer[16] = {0};
+	// input error handling
 	
-	fd = fopen("p1.txt", "w+");
-	srand(time(NULL));   
-
 	if(L < 20000){
 		L = 20000;
 	}
@@ -30,32 +25,50 @@ int main(int argc, char* argv[]){
 		exit(-1);
 	}
 
+	// generate the text file with L >= 20,000 integers and 80 negative integers ranging  
+	FILE *fd;
+	char buffer[16] = {0};
+	char *fname = "p1.txt";	
 
-	// positions loop
-	int pos[H];
-	for(int i = 0; i< H; i++){
-		pos[i] = rand() % L +1;		
-	}
+	if(access(fname, F_OK) != 0){
 
-	for(int i = 0; i< L; ++i){
-		r = rand();  
+		fd = fopen(fname, "w+");
 
-		for(int j = 0; j < H; ++j){
-			if(i == pos[j]){
-				r = -1 * (rand() % 80 + 1);
-			}
+
+		srand(time(NULL));   
+
+
+		// positions loop
+		int pos[H];
+		for(int i = 0; i< H; i++){
+			pos[i] = rand() % L +1;		
 		}
 
-//		printf("%d \n", r);
+		for(int i = 0; i< L; ++i){
+			r = rand();  
 
-		sprintf(buffer, "%d", r);
-		fputs(buffer, fd);
-		fputs(" ", fd);
+			for(int j = 0; j < H; ++j){
+				if(i == pos[j]){
+					r = -1 * (rand() % 80 + 1);
+				}
+			}
+
+			//		printf("%d \n", r);
+
+			sprintf(buffer, "%d", r);
+			fputs(buffer, fd);
+			fputs(" ", fd);
+		}
+
+
+	} else{
+		fd = fopen(fname, "r");
 	}
-
 
 
 	// find max, average, and number of H
+
+
 
 
 	return 0;

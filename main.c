@@ -3,6 +3,7 @@
 #include <time.h> 
 #include <stdint.h>
 #include <unistd.h>
+#include <math.h>
 
 
 int main(int argc, char* argv[]){
@@ -34,9 +35,7 @@ int main(int argc, char* argv[]){
 
 		fd = fopen(fname, "w+");
 
-
 		srand(time(NULL));   
-
 
 		// positions loop
 		int pos[H];
@@ -66,10 +65,44 @@ int main(int argc, char* argv[]){
 	}
 
 
-	// find max, average, and number of H
-
-
-
 
 	return 0;
 }
+
+
+int *DFS_calc(char* fname, int H, int pn){
+	// returns an array [max, avg, # of H]
+	// traverses with Depth first search
+
+	int *calc = malloc(3);
+
+
+	int level;
+	for(int i = 0; i< pn; ++i){
+
+		if( (pn - pow(2, i)) > 0 ){
+			level = i;
+		}
+	}
+
+
+	pid_t pid;
+	int arr[3];
+
+	for(int i = 0; i<level; ++i){
+		pid = fork();	
+	}
+
+
+	if((pid  = 0)) {
+		// child process
+
+	} else{
+		// parent process	
+
+	}
+
+	return calc;
+
+}
+
